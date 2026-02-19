@@ -74,7 +74,7 @@ for (let item of itemsWrapper) {
     })
 }
 /*-------Модальное окно-------*/
-const modal = document.querySelector(".pick-up-a-car__modal");
+/*const modal = document.querySelector(".pick-up-a-car__modal");
 const trigger = document.querySelector(".pick-up-a-car__form-button2");
 const closeButton = document.querySelector(".close-button");
 
@@ -91,7 +91,7 @@ function windowOnClick(event) {
 
 trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
+window.addEventListener("click", windowOnClick);*/
 /*--------main-top---------*/
 const mainTopButtons = document.querySelector('.main-top__buttons');
 const mainTopButton = Array.from(mainTopButtons.querySelectorAll('.main-top__button'));
@@ -155,99 +155,121 @@ titles1.forEach(item => item.addEventListener('click', () => {
 }));
 
 // ========== БАЗА ДАННЫХ АВТОМОБИЛЕЙ ==========
-const carsDatabase = [
-    // Лада
+
+// ========== БАЗА ДАННЫХ АВТОМОБИЛЕЙ ==========
+/*const carsDatabase = [
     { brand: 'Lada', model: 'Granta', gearbox: 'MT', drive: 'FWD', price: 699300, body: 'sedan', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Lada+Granta' },
     { brand: 'Lada', model: 'Vesta', gearbox: 'AT', drive: 'FWD', price: 1250000, body: 'sedan', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Lada+Vesta' },
     { brand: 'Lada', model: 'Niva Travel', gearbox: 'MT', drive: '4WD', price: 1200000, body: 'suv', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Niva+Travel' },
-    // Haval
     { brand: 'Haval', model: 'M6', gearbox: 'AT', drive: 'FWD', price: 1949000, body: 'crossover', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Haval+M6' },
     { brand: 'Haval', model: 'Jolion', gearbox: 'AT', drive: 'FWD', price: 2100000, body: 'crossover', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Haval+Jolion' },
     { brand: 'Haval', model: 'Dargo', gearbox: 'AT', drive: '4WD', price: 3200000, body: 'suv', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Haval+Dargo' },
-    // Kia
     { brand: 'Kia', model: 'Rio', gearbox: 'MT', drive: 'FWD', price: 1250000, body: 'sedan', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Kia+Rio' },
     { brand: 'Kia', model: 'Picanto', gearbox: 'AT', drive: 'FWD', price: 1334900, body: 'hatchback', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Kia+Picanto' },
     { brand: 'Kia', model: 'Sportage', gearbox: 'AT', drive: '4WD', price: 3150000, body: 'suv', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Kia+Sportage' },
-    // Renault
     { brand: 'Renault', model: 'Logan', gearbox: 'MT', drive: 'FWD', price: 1124000, body: 'sedan', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Renault+Logan' },
     { brand: 'Renault', model: 'Duster', gearbox: 'AT', drive: '4WD', price: 2000000, body: 'suv', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Renault+Duster' },
-    { brand: 'Renault', model: 'Arkana', gearbox: 'AT', drive: 'FWD', price: 2100000, body: 'coupe', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Renault+Arkana' }
+    { brand: 'Renault', model: 'Arkana', gearbox: 'AT', drive: 'FWD', price: 2100000, body: 'coupe', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Renault+Arkana' },
+    { brand: 'Toyota', model: 'Camry', gearbox: 'AT', drive: 'FWD', price: 3500000, body: 'sedan', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Toyota+Camry' },
+    { brand: 'Toyota', model: 'RAV4', gearbox: 'CVT', drive: '4WD', price: 3800000, body: 'suv', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Toyota+RAV4' },
+    { brand: 'Hyundai', model: 'Solaris', gearbox: 'MT', drive: 'FWD', price: 1400000, body: 'sedan', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Hyundai+Solaris' },
+    { brand: 'Hyundai', model: 'Creta', gearbox: 'AT', drive: 'FWD', price: 2200000, body: 'crossover', image: 'https://via.placeholder.com/300x180/2d3e50/ffffff?text=Hyundai+Creta' }
 ];
 
-// ========== НАСТРОЙКА ВЫПАДАЮЩИХ СПИСКОВ ==========
 document.addEventListener('DOMContentLoaded', function () {
-    // Находим все элементы формы подбора (нужно убедиться, что селекторы верные)
-    const brandSelect = document.querySelector('select[name="brand"]') || document.querySelector('.car-filter select:first-child') || createFallbackSelect('brand');
-    const gearboxSelect = document.querySelector('select[name="gearbox"]') || document.querySelectorAll('.car-filter select')[1] || createFallbackSelect('gearbox');
-    const driveSelect = document.querySelector('select[name="drive"]') || document.querySelectorAll('.car-filter select')[2] || createFallbackSelect('drive');
-    const priceMinInput = document.querySelector('input[placeholder*="Цена от"]') || document.querySelectorAll('input[type="text"]')[0];
-    const priceMaxInput = document.querySelector('input[placeholder*="Цена до"]') || document.querySelectorAll('input[type="text"]')[1];
-    const submitButton = document.querySelector('button:contains("Подобрать")') || Array.from(document.querySelectorAll('button')).find(btn => btn.textContent.includes('Подобрать'));
+    // ========== ПОЛУЧАЕМ ЭЛЕМЕНТЫ ==========
+    const brandItems = document.querySelectorAll('#brand-select li');
+    const gearboxItems = document.querySelectorAll('#gearbox-select li');
+    const driveItems = document.querySelectorAll('#drive-select li');
+    const priceMinInput = document.getElementById('price-min');
+    const priceMaxInput = document.getElementById('price-max');
+    const submitBtn = document.getElementById('submit-filter-btn');
 
-    // Функция для создания селектов, если их нет (на случай несовпадения селекторов)
-    function createFallbackSelect(type) {
-        console.warn(`Селект для ${type} не найден, создаю запасной вариант`);
-        // Здесь можно добавить логику, но лучше просто вернуть null
-        return null;
+    // Элементы для отображения выбранного значения
+    const brandDisplay = document.querySelector('.pick-up-a-car__filter-item:first-child .pick-up-a-car__text:first-child');
+    const gearboxDisplay = document.querySelector('.pick-up-a-car__filter-item:nth-child(2) .pick-up-a-car__text:first-child');
+    const driveDisplay = document.querySelector('.pick-up-a-car__filter-item:nth-child(3) .pick-up-a-car__text:first-child');
+
+    // ========== СОСТОЯНИЕ ВЫБРАННЫХ ЗНАЧЕНИЙ ==========
+    let selectedFilters = {
+        brand: '',
+        gearbox: '',
+        drive: ''
+    };
+
+    // ========== ФУНКЦИЯ ДЛЯ ОБРАБОТКИ ВЫБОРА ==========
+    function setupCustomSelect(items, displayElement, filterType) {
+        items.forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+
+                // Получаем значение из data-value или текста
+                const value = this.dataset.value || this.textContent.trim();
+                const text = this.textContent.trim();
+
+                // Обновляем отображение
+                if (displayElement) {
+                    displayElement.textContent = text;
+                }
+
+                // Сохраняем значение в состояние
+                selectedFilters[filterType] = value;
+
+                // Закрываем выпадающий список (если у вас есть логика открытия/закрытия)
+                const parentMenu = this.closest('.pick-up-a-car-icon__sub-menu');
+                if (parentMenu) {
+                    parentMenu.classList.remove('active');
+                }
+
+                console.log(`Выбрано: ${filterType} = ${value}`);
+            });
+        });
     }
 
-    // Заполняем селекты, если они найдены
-    if (brandSelect) {
-        brandSelect.innerHTML = '<option value="">Выберите марку</option>' +
-            '<option value="Lada">Lada</option>' +
-            '<option value="Haval">Haval</option>' +
-            '<option value="Kia">Kia</option>' +
-            '<option value="Renault">Renault</option>';
+    // Применяем функцию ко всем спискам
+    setupCustomSelect(brandItems, brandDisplay, 'brand');
+    setupCustomSelect(gearboxItems, gearboxDisplay, 'gearbox');
+    setupCustomSelect(driveItems, driveDisplay, 'drive');
+
+    // ========== ФУНКЦИЯ ФИЛЬТРАЦИИ ==========
+    function filterCars() {
+        return carsDatabase.filter(car => {
+            // Фильтр по марке
+            if (selectedFilters.brand && car.brand !== selectedFilters.brand) return false;
+
+            // Фильтр по КПП
+            if (selectedFilters.gearbox && car.gearbox !== selectedFilters.gearbox) return false;
+
+            // Фильтр по приводу
+            if (selectedFilters.drive && car.drive !== selectedFilters.drive) return false;
+
+            // Фильтр по цене
+            if (priceMinInput && priceMinInput.value) {
+                const minPrice = parseInt(priceMinInput.value.replace(/\s/g, '').replace('Р', '')) || 0;
+                if (car.price < minPrice) return false;
+            }
+
+            if (priceMaxInput && priceMaxInput.value) {
+                const maxPrice = parseInt(priceMaxInput.value.replace(/\s/g, '').replace('Р', '')) || Infinity;
+                if (car.price > maxPrice) return false;
+            }
+
+            return true;
+        });
     }
 
-    if (gearboxSelect) {
-        gearboxSelect.innerHTML = '<option value="">Любая КПП</option>' +
-            '<option value="MT">Механика</option>' +
-            '<option value="AT">Автомат</option>';
-    }
+    // ========== ПОПАП (вставьте вашу разметку попапа) ==========
 
-    if (driveSelect) {
-        driveSelect.innerHTML = '<option value="">Любой привод</option>' +
-            '<option value="FWD">Передний</option>' +
-            '<option value="RWD">Задний</option>' +
-            '<option value="4WD">Полный</option>';
-    }
 
-    // ========== ЛОГИКА ПОИСКА И ПОПАП ==========
+    // Элементы попапа
     const popupOverlay = document.getElementById('popupOverlay');
     const popupCarsList = document.getElementById('popupCarsList');
     const closePopupBtn = document.getElementById('closePopupBtn');
     const getOfferBtn = document.getElementById('getOfferBtn');
 
-    // Функция фильтрации автомобилей
-    function filterCars() {
-        const brand = brandSelect ? brandSelect.value : '';
-        const gearbox = gearboxSelect ? gearboxSelect.value : '';
-        const drive = driveSelect ? driveSelect.value : '';
-
-        let minPrice = 0;
-        let maxPrice = Infinity;
-
-        if (priceMinInput && priceMinInput.value) {
-            minPrice = parseInt(priceMinInput.value.replace(/\s/g, '')) || 0;
-        }
-        if (priceMaxInput && priceMaxInput.value) {
-            maxPrice = parseInt(priceMaxInput.value.replace(/\s/g, '')) || Infinity;
-        }
-
-        return carsDatabase.filter(car => {
-            if (brand && car.brand !== brand) return false;
-            if (gearbox && car.gearbox !== gearbox) return false;
-            if (drive && car.drive !== drive) return false;
-            if (car.price < minPrice) return false;
-            if (car.price > maxPrice) return false;
-            return true;
-        });
-    }
-
-    // Функция отображения автомобилей в попапе
+    // Функция показа попапа
     function showPopupWithCars(cars) {
-        if (!popupCarsList) return;
+        if (!popupCarsList || !popupOverlay) return;
 
         if (cars.length === 0) {
             popupCarsList.innerHTML = '<p class="popup-empty">К сожалению, нет автомобилей, соответствующих вашему запросу. Попробуйте изменить параметры.</p>';
@@ -258,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="popup-car-info">
                             <h4 class="popup-car-title">${car.brand} ${car.model}</h4>
                             <div class="popup-car-specs">
-                                <span>КПП: ${car.gearbox === 'MT' ? 'Механика' : 'Автомат'}</span>
+                                <span>КПП: ${car.gearbox === 'MT' ? 'Механика' : car.gearbox === 'AT' ? 'Автомат' : car.gearbox === 'CVT' ? 'Вариатор' : 'Робот'}</span>
                                 <span>Привод: ${car.drive === 'FWD' ? 'Передний' : car.drive === 'RWD' ? 'Задний' : 'Полный'}</span>
                                 <span>Цена: ${car.price.toLocaleString()} ₽</span>
                             </div>
@@ -269,12 +291,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         popupOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // блокируем прокрутку страницы
+        document.body.style.overflow = 'hidden';
     }
 
     // Обработчик кнопки "Подобрать"
-    if (submitButton) {
-        submitButton.addEventListener('click', function (e) {
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function (e) {
             e.preventDefault();
             const filteredCars = filterCars();
             showPopupWithCars(filteredCars);
@@ -289,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Закрытие по клику на оверлей
+    // Закрытие по клику на фон
     if (popupOverlay) {
         popupOverlay.addEventListener('click', function (e) {
             if (e.target === popupOverlay) {
@@ -299,189 +321,271 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Обработка кнопки "Получить предложение"
+    // Кнопка "Получить предложение"
     if (getOfferBtn) {
         getOfferBtn.addEventListener('click', function () {
-            alert('Спасибо за интерес! Наш менеджер свяжется с вами в ближайшее время для подтверждения заявки.');
+            alert('Спасибо за интерес! Наш менеджер свяжется с вами для оформления заявки.');
             popupOverlay.classList.remove('active');
             document.body.style.overflow = '';
         });
     }
 
-    // Обработка кнопок "Выбрать" внутри попапа (делегирование событий)
+    // Делегирование на кнопки "Выбрать"
     if (popupCarsList) {
         popupCarsList.addEventListener('click', function (e) {
             if (e.target.classList.contains('popup-select-btn')) {
                 const carModel = e.target.getAttribute('data-model');
-                alert(`Вы выбрали автомобиль ${carModel}. Отличный выбор! Наш менеджер свяжется с вами.`);
+                alert(`Вы выбрали ${carModel}. Отличный выбор! Менеджер свяжется с вами.`);
                 popupOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
     }
 
-    // Добавляем немного стилей для попапа (можно вставить в ваш CSS файл)
-    /*  const style = document.createElement('style');
-      style.textContent = `
-           
-              .popup-overlay {
-                  display: none;
-                  position: fixed;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  background: rgba(0, 0, 0, 0.7);
-                  backdrop-filter: blur(5px);
-                  z-index: 1000;
-                  align-items: center;
-                  justify-content: center;
-                  padding: 1rem;
-              }
-              
-              .popup-overlay.active {
-                  display: flex;
-              }
-              
-              .popup-content {
-                  background: white;
-                  border-radius: 30px;
-                  max-width: 900px;
-                  width: 100%;
-                  max-height: 80vh;
-                  overflow-y: auto;
-                  padding: 2rem;
-                  position: relative;
-                  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-                  animation: popupAppear 0.3s ease-out;
-              }
-              
-              @keyframes popupAppear {
-                  from {
-                      opacity: 0;
-                      transform: scale(0.9);
-                  }
-                  to {
-                      opacity: 1;
-                      transform: scale(1);
-                  }
-              }
-              
-              .popup-close {
-                  position: absolute;
-                  top: 1rem;
-                  right: 1.5rem;
-                  font-size: 2rem;
-                  cursor: pointer;
-                  border: none;
-                  background: none;
-                  color: #666;
-                  transition: color 0.2s;
-                  line-height: 1;
-              }
-              
-              .popup-close:hover {
-                  color: #000;
-              }
-              
-              .popup-title {
-                  font-size: 1.8rem;
-                  margin-bottom: 2rem;
-                  color: #333;
-                  padding-right: 2rem;
-              }
-              
-              .popup-cars-list {
-                  display: grid;
-                  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                  gap: 1.5rem;
-                  margin-bottom: 2rem;
-              }
-              
-              .popup-car-card {
-                  border: 1px solid #eee;
-                  border-radius: 20px;
-                  overflow: hidden;
-                  background: #f9f9f9;
-                  transition: transform 0.2s;
-                  display: flex;
-                  flex-direction: column;
-              }
-              
-              .popup-car-card:hover {
-                  transform: translateY(-5px);
-                  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-              }
-              
-              .popup-car-image {
-                  width: 100%;
-                  height: 160px;
-                  object-fit: cover;
-                  background: #2d3e50;
-              }
-              
-              .popup-car-info {
-                  padding: 1rem;
-                  flex: 1;
-              }
-              
-              .popup-car-title {
-                  font-size: 1.2rem;
-                  margin-bottom: 0.5rem;
-                  color: #222;
-              }
-              
-              .popup-car-specs {
-                  display: flex;
-                  flex-direction: column;
-                  gap: 0.3rem;
-                  font-size: 0.9rem;
-                  color: #555;
-              }
-              
-              .popup-select-btn {
-                  background: #e31b23;
-                  color: white;
-                  border: none;
-                  padding: 0.8rem;
-                  font-weight: 600;
-                  cursor: pointer;
-                  transition: background 0.2s;
-                  border-top: 1px solid rgba(0,0,0,0.1);
-              }
-              
-              .popup-select-btn:hover {
-                  background: #c01018;
-              }
-              
-              .popup-footer {
-                  text-align: center;
-                  padding-top: 1rem;
-                  border-top: 1px solid #eee;
-              }
-              
-              .popup-offer-btn {
-                  background: #333;
-                  color: white;
-                  border: none;
-                  padding: 1rem 3rem;
-                  border-radius: 50px;
-                  font-weight: 600;
-                  font-size: 1.1rem;
-                  cursor: pointer;
-                  transition: background 0.2s;
-              }
-              
-              .popup-offer-btn:hover {
-                  background: #111;
-              }
-              
-              .popup-empty {
-                  text-align: center;
-                  padding: 3rem;
-                  color: #777;
-                  font-size: 1.1rem;
-              }
-          `;
-      document.head.appendChild(style);*/
-});
+
+});*/
+// ========== БАЗА ДАННЫХ ==========
+/*const carsDatabase = [
+    // Lada
+    { brand: 'Lada', model: 'Granta', gearbox: 'MT', drive: 'FWD', price: 699300 },
+    { brand: 'Lada', model: 'Granta', gearbox: 'AT', drive: 'FWD', price: 799300 },
+    { brand: 'Lada', model: 'Vesta', gearbox: 'MT', drive: 'FWD', price: 1250000 },
+    { brand: 'Lada', model: 'Vesta', gearbox: 'AT', drive: 'FWD', price: 1350000 },
+    { brand: 'Lada', model: 'Niva Travel', gearbox: 'MT', drive: '4WD', price: 1200000 },
+
+    // Haval
+    { brand: 'Haval', model: 'M6', gearbox: 'MT', drive: 'FWD', price: 1749000 },
+    { brand: 'Haval', model: 'M6', gearbox: 'AT', drive: 'FWD', price: 1949000 },
+    { brand: 'Haval', model: 'Jolion', gearbox: 'AT', drive: 'FWD', price: 2100000 },
+    { brand: 'Haval', model: 'Jolion', gearbox: 'AT', drive: '4WD', price: 2400000 },
+    { brand: 'Haval', model: 'Dargo', gearbox: 'AT', drive: '4WD', price: 3200000 },
+
+    // Kia
+    { brand: 'Kia', model: 'Rio', gearbox: 'MT', drive: 'FWD', price: 1150000 },
+    { brand: 'Kia', model: 'Rio', gearbox: 'AT', drive: 'FWD', price: 1250000 },
+    { brand: 'Kia', model: 'Picanto', gearbox: 'AT', drive: 'FWD', price: 1334900 },
+    { brand: 'Kia', model: 'Sportage', gearbox: 'AT', drive: 'FWD', price: 2950000 },
+    { brand: 'Kia', model: 'Sportage', gearbox: 'AT', drive: '4WD', price: 3150000 },
+
+    // Renault
+    { brand: 'Renault', model: 'Logan', gearbox: 'MT', drive: 'FWD', price: 1024000 },
+    { brand: 'Renault', model: 'Logan', gearbox: 'AT', drive: 'FWD', price: 1124000 },
+    { brand: 'Renault', model: 'Duster', gearbox: 'MT', drive: '4WD', price: 1800000 },
+    { brand: 'Renault', model: 'Duster', gearbox: 'AT', drive: '4WD', price: 2000000 },
+    { brand: 'Renault', model: 'Arkana', gearbox: 'CVT', drive: 'FWD', price: 2100000 }
+];
+
+document.addEventListener('DOMContentLoaded', function () {
+    // ========== ЭЛЕМЕНТЫ ==========
+    const brandDisplay = document.getElementById('selected-brand');
+    const gearboxDisplay = document.getElementById('selected-gearbox');
+    const driveDisplay = document.getElementById('selected-drive');
+    const modelDisplay = document.getElementById('selected-model');
+
+    const brandList = document.getElementById('brand-list');
+    const gearboxList = document.getElementById('gearbox-list');
+    const driveList = document.getElementById('drive-list');
+    const modelList = document.getElementById('model-list');
+
+    const priceMin = document.getElementById('price-min');
+    const priceMax = document.getElementById('price-max');
+    const submitBtn = document.getElementById('submit-filter');
+    const resetBtn = document.getElementById('reset-filters');
+
+    // ========== СОСТОЯНИЕ ==========
+    let filters = {
+        brand: '',
+        gearbox: '',
+        drive: '',
+        model: '',
+        minPrice: 0,
+        maxPrice: Infinity
+    };
+
+    // ========== ЗАГРУЗКА МОДЕЛЕЙ ПО МАРКЕ ==========
+    function updateModelsByBrand(selectedBrand) {
+        // Очищаем список моделей
+        modelList.innerHTML = '';
+
+        if (!selectedBrand) {
+            modelList.innerHTML = '<li>Сначала выберите марку</li>';
+            modelDisplay.textContent = 'Модель';
+            filters.model = '';
+            return;
+        }
+
+        // Получаем уникальные модели для выбранной марки
+        const models = [...new Set(
+            carsDatabase
+                .filter(car => car.brand === selectedBrand)
+                .map(car => car.model)
+        )];
+
+        if (models.length === 0) {
+            modelList.innerHTML = '<li>Нет доступных моделей</li>';
+        } else {
+            // Добавляем опцию "Все модели"
+            modelList.innerHTML = '<li data-value="">Все модели</li>';
+
+            // Добавляем конкретные модели
+            models.forEach(model => {
+                const li = document.createElement('li');
+                li.setAttribute('data-value', model);
+                li.textContent = model;
+                modelList.appendChild(li);
+            });
+        }
+    }
+
+    // ========== ОБРАБОТЧИКИ ВЫБОРА ==========
+    // Марка
+    brandList.addEventListener('click', function (e) {
+        if (e.target.tagName === 'LI') {
+            const value = e.target.dataset.value || e.target.textContent;
+            const text = e.target.textContent;
+
+            brandDisplay.textContent = text;
+            filters.brand = value;
+
+            // Обновляем список моделей
+            updateModelsByBrand(value);
+
+            // Закрываем дропдаун
+            this.classList.remove('active');
+        }
+    });
+
+    // КПП
+    gearboxList.addEventListener('click', function (e) {
+        if (e.target.tagName === 'LI') {
+            const value = e.target.dataset.value;
+            const text = e.target.textContent;
+
+            gearboxDisplay.textContent = text;
+            filters.gearbox = value;
+            this.classList.remove('active');
+        }
+    });
+
+    // Привод
+    driveList.addEventListener('click', function (e) {
+        if (e.target.tagName === 'LI') {
+            const value = e.target.dataset.value;
+            const text = e.target.textContent;
+
+            driveDisplay.textContent = text;
+            filters.drive = value;
+            this.classList.remove('active');
+        }
+    });
+
+    // Модель
+    modelList.addEventListener('click', function (e) {
+        if (e.target.tagName === 'LI') {
+            const value = e.target.dataset.value || '';
+            const text = e.target.textContent;
+
+            modelDisplay.textContent = text;
+            filters.model = value;
+            this.classList.remove('active');
+        }
+    });
+
+    // ========== ФИЛЬТРАЦИЯ ==========
+    function filterCars() {
+        return carsDatabase.filter(car => {
+            if (filters.brand && car.brand !== filters.brand) return false;
+            if (filters.gearbox && car.gearbox !== filters.gearbox) return false;
+            if (filters.drive && car.drive !== filters.drive) return false;
+            if (filters.model && car.model !== filters.model) return false;
+
+            const minPrice = parseInt(priceMin.value.replace(/\s/g, '')) || 0;
+            const maxPrice = parseInt(priceMax.value.replace(/\s/g, '')) || Infinity;
+
+            if (car.price < minPrice) return false;
+            if (car.price > maxPrice) return false;
+
+            return true;
+        });
+    }
+
+    // ========== СБРОС ФИЛЬТРОВ ==========
+    function resetFilters() {
+        filters = {
+            brand: '',
+            gearbox: '',
+            drive: '',
+            model: '',
+            minPrice: 0,
+            maxPrice: Infinity
+        };
+
+        brandDisplay.textContent = 'Марка';
+        gearboxDisplay.textContent = 'КПП';
+        driveDisplay.textContent = 'Привод';
+        modelDisplay.textContent = 'Модель';
+
+        priceMin.value = '';
+        priceMax.value = '';
+
+        updateModelsByBrand('');
+    }
+
+    // ========== ПОКАЗ РЕЗУЛЬТАТОВ ==========
+    function showResults() {
+        const results = filterCars();
+
+        if (results.length === 0) {
+            alert('По вашему запросу ничего не найдено. Попробуйте изменить параметры.');
+        } else {
+            // Здесь можно открыть попап с результатами
+            alert(`Найдено ${results.length} автомобилей. Первый: ${results[0].brand} ${results[0].model}`);
+
+            // Или вызвать функцию показа попапа из предыдущего кода
+            // showPopupWithCars(results);
+        }
+    }
+
+    // ========== ОБРАБОТЧИКИ КНОПОК ==========
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            showResults();
+        });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            resetFilters();
+        });
+    }
+
+    // ========== ОТКРЫТИЕ/ЗАКРЫТИЕ ДРОПДАУНОВ ==========
+    // Добавьте эту логику, если её еще нет
+    document.querySelectorAll('.pick-up-a-car__filter-item').forEach(item => {
+        const trigger = item.querySelector('.pick-up-a-car__text:first-child');
+        const menu = item.querySelector('.pick-up-a-car-icon__sub-menu');
+
+        if (trigger && menu) {
+            trigger.addEventListener('click', function (e) {
+                e.stopPropagation();
+
+                // Закрываем все другие меню
+                document.querySelectorAll('.pick-up-a-car-icon__sub-menu').forEach(m => {
+                    if (m !== menu) m.classList.remove('active');
+                });
+
+                menu.classList.toggle('active');
+            });
+        }
+    });
+
+    // Закрытие при клике вне меню
+    document.addEventListener('click', function () {
+        document.querySelectorAll('.pick-up-a-car-icon__sub-menu').forEach(menu => {
+            menu.classList.remove('active');
+        });
+    });
+});*/
+

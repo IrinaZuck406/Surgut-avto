@@ -84,88 +84,130 @@
 				<h2 class="pick-up-a-car__title title">
 					Подобрать автомобиль
 				</h2>
+
+				<!-- ОСНОВНЫЕ ФИЛЬТРЫ (сначала обязательные) -->
+				<ul class="pick-up-a-car__filter">
+					<!-- 1. МАРКА (выбираем первую) -->
+					<li class="pick-up-a-car__filter-item">
+						<p class="pick-up-a-car__text" id="selected-brand">Марка</p>
+						<div class="pick-up-a-car-icon"></div>
+						<ul id="brand-list" class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
+							<li data-value="Lada">Lada</li>
+							<li data-value="Haval">Haval</li>
+							<li data-value="Kia">Kia</li>
+							<li data-value="Renault">Renault</li>
+							<li data-value="Toyota">Toyota</li>
+							<li data-value="Hyundai">Hyundai</li>
+						</ul>
+					</li>
+
+					<!-- 2. КПП -->
+					<li class="pick-up-a-car__filter-item">
+						<p class="pick-up-a-car__text" id="selected-gearbox">КПП</p>
+						<div class="pick-up-a-car-icon"></div>
+						<ul id="gearbox-list" class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
+							<li data-value="MT">Механика</li>
+							<li data-value="AT">Автомат</li>
+							<li data-value="CVT">Вариатор</li>
+						</ul>
+					</li>
+
+					<!-- 3. ПРИВОД -->
+					<li class="pick-up-a-car__filter-item">
+						<p class="pick-up-a-car__text" id="selected-drive">Привод</p>
+						<div class="pick-up-a-car-icon"></div>
+						<ul id="drive-list" class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
+							<li data-value="FWD">Передний</li>
+							<li data-value="RWD">Задний</li>
+							<li data-value="4WD">Полный</li>
+						</ul>
+					</li>
+
+					<!-- 4. МОДЕЛЬ (загружается после выбора марки) -->
+					<li class="pick-up-a-car__filter-item">
+						<p class="pick-up-a-car__text" id="selected-model">Модель</p>
+						<div class="pick-up-a-car-icon"></div>
+						<ul id="model-list" class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
+							<!-- Сюда будут подгружаться модели динамически -->
+							<li>Сначала выберите марку</li>
+						</ul>
+					</li>
+
+					<!-- 5. ЦЕНА (диапазон) -->
+					<li class="pick-up-a-car__filter-item price-range">
+						<input type="text" id="price-min" placeholder="Цена от">
+					</li>
+					<li class="pick-up-a-car__filter-item price-range">
+						<input type="text" id="price-max" placeholder="Цена до">
+					</li>
+				</ul>
+
+				<!-- КНОПКИ ДЕЙСТВИЙ -->
+				<!--	<div class="pick-up-a-car__buttons">
+					<button class="pick-up-a-car__button1 button" id="reset-filters">Сбросить фильтры</button>
+					<button class="pick-up-a-car__button2 button" id="submit-filter">Подобрать</button>
+				</div>-->
+				<div class="pick-up-a-car__buttons">
+					<button class="pick-up-a-car__button1 button" id="reset-filters">Сбросить фильтры</button>
+					<button class="pick-up-a-car__button2 button" id="submit-filter">Подобрать</button>
+				</div>
+			</div>
+		</section>
+		<!--	<section class="pick-up-a-car">
+			<div class="pick-up-a-car__container container">
+				<h2 class="pick-up-a-car__title title">
+					Подобрать автомобиль
+				</h2>
 				<ul class="pick-up-a-car__filter">
 					<li class="pick-up-a-car__filter-item">
 						<p class="pick-up-a-car__text">Марка</p>
 						<div class="pick-up-a-car-icon"></div>
-						<ul class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
-							<li>Милан</li>
-							<li>Рим</li>
-							<li>Милан</li>
-							<li>Венеция</li>
-							<li>Лацио</li>
-							<li>Флоренция vvvvvvvvvv</li>
+						<ul id="brand-select" class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
+							<li data-value="Lada">Lada</li>
+							<li data-value="Haval">Haval</li>
+							<li data-value="Kia">Kia</li>
+							<li data-value="Renault">Renault</li>
+							<li data-value="Toyota">Toyota</li>
+							<li data-value="Hyundai">Hyundai</li>
 						</ul>
 					</li>
 					<li class="pick-up-a-car__filter-item">
 						<p class="pick-up-a-car__text">КПП</p>
 						<div class="pick-up-a-car-icon"></div>
-						<ul class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
-							<li>Милан</li>
-							<li>Рим</li>
-							<li>Милан</li>
-							<li>Венеция</li>
-							<li>Лацио</li>
-							<li>Флоренция vvvvvvvvvv</li>
+						<ul id="gearbox-select" class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
+							<li data-value="MT">Механика</li>
+							<li data-value="AT">Автомат</li>
+							<li data-value="CVT">Вариатор</li>
+							<li data-value="robot">Робот</li>
 						</ul>
 					</li>
 					<li class="pick-up-a-car__filter-item">
 						<p class="pick-up-a-car__text">Привод</p>
 						<div class="pick-up-a-car-icon"></div>
-						<ul class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
-							<li>Милан</li>
-							<li>Рим</li>
-							<li>Милан</li>
-							<li>Венеция</li>
-							<li>Лацио</li>
-							<li>Флоренция vvvvvvvvvv</li>
+						<ul id="drive-select" class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
+							<li data-value="FWD">Передний</li>
+							<li data-value="RWD">Задний</li>
+							<li data-value="4WD">Полный</li>
 						</ul>
 					</li>
 					<li class="pick-up-a-car__filter-item">
 						<p class="pick-up-a-car__text">Модель</p>
 						<div class="pick-up-a-car-icon"></div>
 						<ul class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
-							<li>Милан</li>
-							<li>Рим</li>
-							<li>Милан</li>
-							<li>Венеция</li>
-							<li>Лацио</li>
-							<li>Флоренция vvvvvvvvvv</li>
+							<li>Все модели</li>
 						</ul>
 					</li>
 					<li class="pick-up-a-car__filter-item">
-						<div class="pick-up-a-car__text-wrapper">
-							<p class="pick-up-a-car__text pick-up-a-car__text_1">Цена от</p>
-							<p class="pick-up-a-car__text">1 300 000 Р</p>
-						</div>
-						<div class="pick-up-a-car-icon"></div>
-						<ul class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
-							<li>Милан</li>
-							<li>Рим</li>
-							<li>Милан</li>
-							<li>Венеция</li>
-							<li>Лацио</li>
-							<li>Флоренция vvvvvvvvvv</li>
-						</ul>
+						<input type="text" id="price-min" placeholder="Цена от 1 300 000 Р">
+			
 					</li>
 					<li class="pick-up-a-car__filter-item">
-						<div class="pick-up-a-car__text-wrapper">
-							<p class="pick-up-a-car__text pick-up-a-car__text_1">Цена до</p>
-							<p class="pick-up-a-car__text">5 640 000 Р</p>
-						</div>
-						<div class="pick-up-a-car-icon"></div>
-						<ul class="pick-up-a-car-icon__sub-menu sub-menu pick-up-a-car__text">
-							<li>Милан</li>
-							<li>Рим</li>
-							<li>Милан</li>
-							<li>Венеция</li>
-							<li>Лацио</li>
-							<li>Флоренция vvvvvvvvvv</li>
-						</ul>
+						<input type="text" id="price-max" placeholder="Цена до 5 640 000 Р">
+				
 					</li>
-				</ul>
+				</ul>-->
 
-				<div class="pick-up-a-car__wrapper">
+		<!--		<div class="pick-up-a-car__wrapper">
 					<div class="pick-up-a-car__slider swiper">
 						<div class="pick-up-a-car__slider-wrapper swiper-wrapper">
 							<div class="pick-up-a-car__slider-slide swiper-slide" data-hash="slide-1">
@@ -292,10 +334,10 @@
 				</div>
 				<div class="pick-up-a-car__buttons">
 					<button class="pick-up-a-car__button1 button">Сбросить фильтры</button>
-					<button class="pick-up-a-car__button2 button">Подобрать</button>
+					<button id="submit-filter-btn" class="pick-up-a-car__button2 button">Подобрать</button>
 				</div>
 			</div>
-		</section>
+		</section>-->
 		<div class="logo">
 			<div class="logo__container container">
 				<img src="images/logo1.png">
@@ -1097,6 +1139,7 @@
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 	<script src="script.js"></script>
+	<script src="filter-script2.js"></script>
 </body>
 
 </html>
